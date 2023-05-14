@@ -10,7 +10,7 @@ from django.forms.models import model_to_dict
 @api_view(["POST"])
 def register(request):
     data = json.loads(request.body)
-    account = Account(account_type=data["account_type"],wallet_address=data["wallet_address"],name=data["name"],contract_address=data["contract_address"])
+    account = Account(account_type=data["account_type"],wallet_address=data["wallet_address"].lower(),name=data["name"],contract_address=data["contract_address"])
     account.save()
     
     return Response({"message":"OK"},status=200)

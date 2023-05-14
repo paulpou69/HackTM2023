@@ -10,4 +10,12 @@ class Account(models.Model):
                                validators=[MinLengthValidator(42)])
     name = models.CharField(max_length=200)
     contract_address = models.CharField(max_length=42,
-                               validators=[MinLengthValidator(42)])
+                               validators=[MinLengthValidator(42)],null=True)
+    
+class Material(models.Model):
+    certifier = models.ManyToManyField('Account', related_name="certifier")
+    producer = models.ForeignKey('Account',on_delete=models.CASCADE,related_name="producer")
+    name = models.CharField(max_length=200)
+    contract_address = models.CharField(max_length=42,
+                               validators=[MinLengthValidator(42)],null=True)
+    
